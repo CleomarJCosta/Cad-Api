@@ -1,6 +1,8 @@
 package com.app.cadastro.Domain.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,9 +30,10 @@ public class Pessoa {
     @Column(name = "Data Nascimento")
     private LocalDate dataNasc;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "pessoa")
-    private Set<Contato> contatos;
+    //@JsonBackReference
+  //  @JsonIgnore
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Contato> contatos;
 
     public Long getID() {
         return ID;
@@ -56,11 +59,11 @@ public class Pessoa {
         this.CPF = CPF;
     }
 
-    public Set<Contato> getContatos() {
+    public List<Contato> getContatos() {
         return contatos;
     }
 
-    public void setContatos(Set<Contato> contatos) {
+    public void setContatos(List<Contato> contatos) {
         this.contatos = contatos;
     }
 

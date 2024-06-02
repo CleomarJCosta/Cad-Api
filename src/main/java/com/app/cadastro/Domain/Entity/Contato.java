@@ -2,6 +2,7 @@ package com.app.cadastro.Domain.Entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,10 @@ public class Contato  {
     @Column
     private String nome;
 
+    @Column
+    private Integer IdPessoa ;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pessoaID")
     private Pessoa pessoa;
@@ -38,6 +43,14 @@ public class Contato  {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Integer getIdPessoa() {
+        return IdPessoa;
+    }
+
+    public void setIdPessoa(Integer idPessoa) {
+        IdPessoa = idPessoa;
     }
 
     public Long getID() {

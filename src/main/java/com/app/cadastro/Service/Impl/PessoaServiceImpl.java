@@ -1,9 +1,13 @@
 package com.app.cadastro.Service.Impl;
 
+import com.app.cadastro.Domain.Entity.Contato;
 import com.app.cadastro.Domain.Entity.Pessoa;
+import com.app.cadastro.Domain.Repository.ContatoRepository;
 import com.app.cadastro.Domain.Repository.PessoaRepository;
 import com.app.cadastro.Exception.PessoaNaoEncontradaException;
+import com.app.cadastro.Rest.DTO.ContatoDTO;
 import com.app.cadastro.Service.PessoaService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,9 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private ContatoRepository contatoRepository;
 
     @Override
     public Pessoa salvar(Pessoa pessoa) {
@@ -33,15 +40,13 @@ public class PessoaServiceImpl implements PessoaService {
 
     @Override
     public Pessoa atualiza(Pessoa newPessoa, Long id) {
-        Optional<Pessoa> optionalPessoa = pessoaRepository.findById(id);
         Pessoa pessoa = pessoaRepository
                 .findById(id)
                 .orElseThrow(
                         () -> new PessoaNaoEncontradaException("Pessoa Não Encontrada" + id)
                 );
+
         pessoa.setNome(newPessoa.getNome());
-        pessoa.setID(newPessoa.getID());
-        pessoa.setContatos(newPessoa.getContatos());
         pessoa.setCPF(newPessoa.getCPF());
         pessoa.setDataNasc(newPessoa.getDataNasc());
 
@@ -49,14 +54,20 @@ public class PessoaServiceImpl implements PessoaService {
         return pessoa;
     }
 
+
+    @Transactional
     @Override
-    public void deletar(Long id) {
-        Optional<Pessoa> optionalPessoa = pessoaRepository.findById(id);
-        Pessoa pessoa = pessoaRepository
-                .findById(id)
-                .orElseThrow(
-                        () -> new PessoaNaoEncontradaException("Pessoa Não Encontrada" + id)
-                );
-        pessoaRepository.delete(pessoa);
+    public void deletar(Long idPessoa) {
+        Pessoa pessoa = pessoaRepository.findById(idPessoa)
+                .orElseThrow(() -> new PessoaNaoEncontradaException("Pessoa não encontrada: " + idPessoa));
+
+        // Remover todos os contatos associados à pessoa
+        for (Contato contato : pessoa.getContatos()) {
+            contato.setPessoa(null); // Desvincular o contato da pessoa
+            contatoRepository.save(contato); // Salvar o contato atualizado
+        }
+
+        pessoaRepository.delete(pessoa); // Excluir a pessoa
     }
+
 }

@@ -26,13 +26,20 @@ public class PessoaController {
     public ResponseEntity<List<Pessoa>> getAll(){
         return ResponseEntity.status(HttpStatus.OK).body(pessoaService.listar());
     }
+
     @GetMapping("{Id}")
     public Optional<Pessoa> getById(@PathVariable Long Id){
         return pessoaService.listarPorId(Id);
     }
+
     @DeleteMapping("{Id}")
-    public void delete(Long Id){
+    public void delete( @PathVariable Long Id){
         pessoaService.deletar(Id);
+    }
+
+    @PutMapping("{id}")
+    public void update(@PathVariable Long id, @RequestBody Pessoa pessoa){
+         pessoaService.atualiza(pessoa, id);
     }
 
 

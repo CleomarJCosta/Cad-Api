@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/pessoa/contato")
@@ -21,8 +21,10 @@ public class ContatoController {
     public void Post(@RequestBody ContatoDTO dto){
         contatoService.salvaContato(dto);
     }
-    @GetMapping
-    public ResponseEntity<List<Contato>> get(){
-        return ResponseEntity.status(HttpStatus.OK).body(contatoService.listarContatos());
+    @GetMapping("{id}")
+    public ResponseEntity<Optional<Contato>> get(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(contatoService.listarContatos(id));
     }
+
+
 }

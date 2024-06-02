@@ -8,6 +8,7 @@ class CadastroApiApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
