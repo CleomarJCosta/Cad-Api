@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "6edf7cee-c3de-444b-b470-54102709c968",
+		"name": "Cad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11731373",
+		"_collection_link": "https://universal-meadow-826761.postman.co/workspace/My-Workspace~2d71738e-c78a-447b-8a46-e15b74aaeaa1/collection/11731373-6edf7cee-c3de-444b-b470-54102709c968?action=share&source=collection_link&creator=11731373"
+	},
+	"item": [
+		{
+			"name": "Busca Pessoa",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followOriginalHttpMethod": false,
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://54.224.2.220:8090/api/pessoa",
+					"protocol": "http",
+					"host": [
+						"54",
+						"224",
+						"2",
+						"220"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"pessoa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca Pessoa por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://54.224.2.220:8090/api/pessoa/4",
+					"protocol": "http",
+					"host": [
+						"54",
+						"224",
+						"2",
+						"220"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"pessoa",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adiciona Pessoa",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disableUrlEncoding": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"João Paulo\",\r\n  \"cpf\": \"123.456.789-00\",\r\n  \"dataNasc\": \"1980-01-01\"\r\n  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://54.224.2.220:8090/api/pessoa",
+					"protocol": "http",
+					"host": [
+						"54",
+						"224",
+						"2",
+						"220"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"pessoa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualiza Pessoa",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Charles Ricardo\",\r\n  \"cpf\": \"123.456.789-00\",\r\n  \"dataNasc\": \"1980-01-01\"\r\n  \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://54.224.2.220:8090/api/pessoa/1",
+					"protocol": "http",
+					"host": [
+						"54",
+						"224",
+						"2",
+						"220"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"pessoa",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Pessoa",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Paulo Silva\",\r\n  \"cpf\": \"123.456.789-00\",\r\n  \"dataNasc\": \"1980-01-01\"\r\n  \r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://54.224.2.220:8090/api/pessoa/1",
+					"protocol": "http",
+					"host": [
+						"54",
+						"224",
+						"2",
+						"220"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"pessoa",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adiciona Contato",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"pessoa\":4,\r\n    \"nome\": \"Joao\",\r\n    \"email\":\"carlos@email.com\",\r\n    \"telefone\":\"44565897412\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://54.224.2.220:8090/api/pessoa/contato",
+					"protocol": "http",
+					"host": [
+						"54",
+						"224",
+						"2",
+						"220"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"pessoa",
+						"contato"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busca contatos por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://54.224.2.220:8090/api/pessoa/contato/1",
+					"protocol": "http",
+					"host": [
+						"54",
+						"224",
+						"2",
+						"220"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"pessoa",
+						"contato",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
